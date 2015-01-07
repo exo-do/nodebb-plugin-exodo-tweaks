@@ -1,0 +1,24 @@
+{
+  "name": "nodebb-plugin-mixodo",
+  "version": "0.0.1",
+  "description": "Various fixes and small changes for exo.do NodeBB",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exo-do/nodebb-plugin-mixodo"
+  },
+  "keywords": [
+    "nodebb",
+    "plugin",
+    "exo-do",
+    "exo.do"
+  ],
+  "author": {
+    "name": "Korrosivo"
+  },
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/exo-do/nodebb-plugin-mixodo/issues"
+  },
+  "readmeFilename": "README.md"
+}
