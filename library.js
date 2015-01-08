@@ -6,18 +6,32 @@
 		topics = module.parent.require('./topics'),
 		category = {};
 	
-	/**
-	* Comprueba si el usuario ha participado en cada tema de la categoría
-	* y setea el booleano userParticipated en la respuesta de la API
-	*/
+
 	category.categoryTopicsGet = function (data, callback) {
 		async.each(data.topics, function(topic, next) {
-			userParticipated(topic, data.uid, next);
+			addExtraFields(topic, data, next);
 		}, function(err) {
 			callback(err, data);
 		});
 	};
 	
+	function addExtraFields(topic, data, callback) {
+		async.series([
+			userParticipated(topic, data.uid, callback),
+			isHot(topic)
+		], function(err) {
+			if (err) {
+				callback(err)
+			} else {
+				callback();
+			}
+		});
+	};
+	
+	/**
+	* Comprueba si el usuario ha participado en cada tema de la categoría
+	* y setea el booleano userParticipated en la respuesta de la API
+	*/
 	function userParticipated(topic, uid, callback) {
 		topics.getUids(topic.tid, function(err, uids){
 			if (err) {
@@ -32,6 +46,14 @@
 			callback();
 	
 		});
+	};
+
+	/**
+	* Comprueba si el topic tiene más de 15 respuestas o 150 visitas
+	* y setea el booleano isHot en la respuesta de la API
+	*/
+	function isHot(topic, callback) {				
+		topic.isHot = (topic.postcount >= 15 || topic.viewcount >= 150 ? true : false);
 	};
 	
 	module.exports = category;

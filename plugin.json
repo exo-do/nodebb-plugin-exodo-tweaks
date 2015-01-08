@@ -1,8 +1,8 @@
 {
-	"id": "nodebb-plugin-mixodo",
-	"name": "[exo.do] mixed-fixes",
-	"description": "Various fixes and small changes for exo.do NodeBB",
-	"url": "https://github.com/exo-do/nodebb-plugin-mixodo",
+	"id": "nodebb-plugin-exodo-tweaks",
+	"name": "[exo.do] tweaks",
+	"description": "exo.do tweaks",
+	"url": "https://github.com/exo-do/nodebb-plugin-exodo-tweaks",
 	"library": "./library.js",
 	"hooks": [
 		{ "hook": "filter:category.topics.get", "method": "categoryTopicsGet" }
