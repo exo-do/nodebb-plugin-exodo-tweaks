@@ -4,6 +4,7 @@
 	var _ = module.parent.require('underscore'),
 		async = module.parent.require('async'),
 		topics = module.parent.require('./topics'),
+		user = module.parent.require('./user'),
 		category = {};
 	
 
@@ -18,7 +19,8 @@
 	function addExtraFields(topic, data, callback) {
 		async.series([
 			userParticipated(topic, data.uid, callback),
-			isHot(topic)
+			isHot(topic),
+			setPagesCount(topic, data.uid)
 		], function(err) {
 			if (err) {
 				callback(err)
@@ -54,6 +56,21 @@
 	*/
 	function isHot(topic, callback) {				
 		topic.isHot = (topic.postcount >= 15 || topic.viewcount >= 150 ? true : false);
+	};
+	
+	
+	/**
+	* Comprueba el número de posts por página del usuario logeado
+	* y setea el pagesCount con el número de páginas del hilo
+	*/
+	function setPagesCount(topic, uid) {
+		user.getSettings(uid, function(err, settings) {
+			if (err) {
+				return callback(err);
+			}
+			
+			topic.pagesCount = Math.floor(topic.postcount / settings.postsPerPage)+1;
+		});
 	};
 	
 	module.exports = category;
