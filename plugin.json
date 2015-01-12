@@ -5,6 +5,7 @@
 	"url": "https://github.com/exo-do/nodebb-plugin-exodo-tweaks",
 	"library": "./library.js",
 	"hooks": [
-		{ "hook": "filter:category.topics.get", "method": "categoryTopicsGet" }
+		{ "hook": "filter:category.topics.get", "method": "categoryTopicsGet" },
+		{ "hook": "filter:posts.custom_profile_info", "method": "addProfileInfo" }
 	]
 }

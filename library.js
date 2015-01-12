@@ -3,12 +3,12 @@
 
 	var _ = module.parent.require('underscore'),
 		async = module.parent.require('async'),
+		moment = require('moment'),
 		topics = module.parent.require('./topics'),
 		user = module.parent.require('./user'),
-		category = {};
+		plugin = {};
 
-
-	category.categoryTopicsGet = function (data, callback) {
+	plugin.categoryTopicsGet = function (data, callback) {
 		async.each(data.topics, function(topic, next) {
 			addExtraFields(topic, data, next);
 		}, function(err) {
@@ -16,6 +16,21 @@
 		});
 	};
 
+	plugin.addProfileInfo = function(profileInfo, callback) {
+		moment.locale('es', { monthsShort : "Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic".split("_") });
+		user.getUserFields(profileInfo.uid, ['location','joindate'], function(err, data) {
+			if (err) {
+				return callback(err);
+			}
+
+			profileInfo.profile.push({ joindate: moment(data.joindate).format('MMM YYYY') });
+			if (data.location)
+				profileInfo.profile.push({ location: data.location });
+			
+			callback(err, profileInfo);
+		});		
+	};
+	
 	function addExtraFields(topic, data, callback) {
 		async.series([
 			userParticipated(topic, data.uid, callback),
@@ -72,7 +87,17 @@
 			topic.pagesCount = Math.floor(topic.postcount / settings.postsPerPage)+1;
 		});
 	};
+	
+	/**
+	* Comprueba el número de posts por página del usuario logeado
+	* y setea el pagesCount con el número de páginas del hilo
+	*/
+	function setPagesCount(topic, uid) {
+		user.getUserData(uid, function(err, userData) {
+			
+		});
+	};
 
-	module.exports = category;
+	module.exports = plugin;
 
 }(module));

@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/exo-do/nodebb-plugin-exodo-tweaks/issues"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "moment": "^2.9.0"
+  }
 }
