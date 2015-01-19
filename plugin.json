@@ -7,5 +7,6 @@
 	"hooks": [
 		{ "hook": "filter:category.topics.get", "method": "categoryTopicsGet" },
 		{ "hook": "filter:posts.custom_profile_info", "method": "addProfileInfo" }
-	]
+	],
+	"scripts": ["tweaks/client/gotopost.js"]
 }

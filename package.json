@@ -1,5 +1,5 @@
 {
-  "name": "nodebb-plugin-mixodo",
+  "name": "nodebb-plugin-exodo-tweaks",
   "version": "0.0.1",
   "description": "exo.do tweaks",
   "main": "library.js",
