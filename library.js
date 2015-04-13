@@ -3,7 +3,7 @@
 
 	var _ = module.parent.require('underscore'),
 		async = module.parent.require('async'),
-		moment = require('moment'),
+		moment = require('./tweaks/client/moment.min.js'),
 		topics = module.parent.require('./topics'),
 		user = module.parent.require('./user'),
 		plugin = {};
@@ -30,6 +30,12 @@
 			callback(err, profileInfo);
 		});		
 	};
+
+	plugin.topicTitleNoEdit = function(post, callback)
+	{
+		console.log(post);
+		//callback(null, post);
+	}
 	
 	function addExtraFields(topic, data, callback) {
 		async.series([

@@ -6,6 +6,7 @@
 	"library": "./library.js",
 	"hooks": [
 		{ "hook": "filter:category.topics.get", "method": "categoryTopicsGet" },
+		{ "hook": "action:topic.edit", "method": "topicTitleNoEdit" },
 		{ "hook": "filter:posts.custom_profile_info", "method": "addProfileInfo" }
 	],
 	"scripts": ["tweaks/client/gotopost.js"]
