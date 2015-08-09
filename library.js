@@ -5,6 +5,7 @@
 		async = module.parent.require('async'),
 		moment = require('./tweaks/client/moment.min.js'),
 		topics = module.parent.require('./topics'),
+		Posts = module.parent.require('./posts'),
 		user = module.parent.require('./user'),
 		plugin = {};
 
@@ -93,6 +94,7 @@
 			topic.pagesCount = Math.floor(topic.postcount / settings.postsPerPage)+1;
 		});
 	};
+
 	
 	/**
 	* Comprueba el número de posts por página del usuario logeado
