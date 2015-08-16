@@ -77,6 +77,14 @@
 	* y setea el booleano isHot en la respuesta de la API
 	*/
 	function isHot(topic, callback) {
+		/*
+		var now = new Date();
+		var creation = new Date(topic.timestamp);
+		var diff = now - creation;
+		var diffMinutes = Math.floor((diff/1000)/60); // Minutes since creation
+		var popularity = topic.postcount / diffMinutes; // Posts por minuto
+		topic.isHot = (popularity > 0);
+		*/
 		topic.isHot = (topic.postcount >= 15 || topic.viewcount >= 150 ? true : false);
 	};
 
