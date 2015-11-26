@@ -9,14 +9,14 @@
 		user = module.parent.require('./user'),
 		plugin = {};
 
-	plugin.categoryTopicsGet = function (data, callback) {
+	/*plugin.categoryTopicsGet = function (data, callback) {
 		async.each(data.topics, function(topic, next) {
 			addExtraFields(topic, data, next);
 		}, function(err) {
 			callback(err, data);
 		});
 	};
-
+		*/
 	plugin.addProfileInfo = function(profileInfo, callback) {
 		moment.locale('es', { monthsShort : "Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic".split("_") });
 		user.getUserFields(profileInfo.uid, ['location','joindate'], function(err, data) {
@@ -32,13 +32,13 @@
 		});		
 	};
 
-	plugin.topicTitleNoEdit = function(post, callback)
+	/*plugin.topicTitleNoEdit = function(post, callback)
 	{
 		console.log(post);
 		//callback(null, post);
 	}
-	
-	function addExtraFields(topic, data, callback) {
+	*/
+	/*function addExtraFields(topic, data, callback) {
 		async.series([
 			userParticipated(topic, data.uid, callback),
 			isHot(topic),
@@ -51,12 +51,12 @@
 			}
 		});
 	};
-
+		*/
 	/**
 	* Comprueba si el usuario ha participado en cada tema de la categoría
 	* y setea el booleano userParticipated en la respuesta de la API
 	*/
-	function userParticipated(topic, uid, callback) {
+	/*function userParticipated(topic, uid, callback) {
 		topics.getUids(topic.tid, function(err, uids){
 			if (err) {
 				return callback(err);
@@ -71,28 +71,20 @@
 
 		});
 	};
-
+		*/
 	/**
 	* Comprueba si el topic tiene más de 15 respuestas o 150 visitas
 	* y setea el booleano isHot en la respuesta de la API
-	*/
+	
 	function isHot(topic, callback) {
-		/*
-		var now = new Date();
-		var creation = new Date(topic.timestamp);
-		var diff = now - creation;
-		var diffMinutes = Math.floor((diff/1000)/60); // Minutes since creation
-		var popularity = topic.postcount / diffMinutes; // Posts por minuto
-		topic.isHot = (popularity > 0);
-		*/
-		topic.isHot = (topic.postcount >= 15 || topic.viewcount >= 150 ? true : false);
+	topic.isHot = (topic.postcount >= 15 || topic.viewcount >= 150 ? true : false);
 	};
-
+	*/
 
 	/**
 	* Comprueba el número de posts por página del usuario logeado
 	* y setea el pagesCount con el número de páginas del hilo
-	*/
+	
 	function setPagesCount(topic, uid) {
 		user.getSettings(uid, function(err, settings) {
 			if (err) {
@@ -102,18 +94,18 @@
 			topic.pagesCount = Math.floor(topic.postcount / settings.postsPerPage)+1;
 		});
 	};
-
+	*/
 	
 	/**
 	* Comprueba el número de posts por página del usuario logeado
 	* y setea el pagesCount con el número de páginas del hilo
-	*/
+	
 	function setPagesCount(topic, uid) {
 		user.getUserData(uid, function(err, userData) {
 			
 		});
 	};
-
+	*/
 	module.exports = plugin;
 
 }(module));
