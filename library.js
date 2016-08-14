@@ -7,6 +7,7 @@
 		topics = module.parent.require('./topics'),
 		Posts = module.parent.require('./posts'),
 		user = module.parent.require('./user'),
+
 		plugin = {};
 
 	/*plugin.categoryTopicsGet = function (data, callback) {
@@ -24,12 +25,12 @@
 				return callback(err);
 			}
 
-			profileInfo.profile.push({ joindate: moment(data.joindate).format('MMM YYYY') });
-			if (data.location)
-				profileInfo.profile.push({ location: data.location });
-			
+			var joindateISO = Date.prototype.toISOString ? new Date(parseInt(data.joindate, 10)).toISOString() : data.joindate;
+
+			profileInfo.profile.push({ joindate:  moment(joindateISO).format('MMM YYYY') });
+
 			callback(err, profileInfo);
-		});		
+		});
 	};
 
 	/*plugin.topicTitleNoEdit = function(post, callback)
@@ -75,7 +76,7 @@
 	/**
 	* Comprueba si el topic tiene más de 15 respuestas o 150 visitas
 	* y setea el booleano isHot en la respuesta de la API
-	
+
 	function isHot(topic, callback) {
 	topic.isHot = (topic.postcount >= 15 || topic.viewcount >= 150 ? true : false);
 	};
@@ -84,7 +85,7 @@
 	/**
 	* Comprueba el número de posts por página del usuario logeado
 	* y setea el pagesCount con el número de páginas del hilo
-	
+
 	function setPagesCount(topic, uid) {
 		user.getSettings(uid, function(err, settings) {
 			if (err) {
@@ -95,14 +96,14 @@
 		});
 	};
 	*/
-	
+
 	/**
 	* Comprueba el número de posts por página del usuario logeado
 	* y setea el pagesCount con el número de páginas del hilo
-	
+
 	function setPagesCount(topic, uid) {
 		user.getUserData(uid, function(err, userData) {
-			
+
 		});
 	};
 	*/
