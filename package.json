@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-exodo-tweaks",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "exo.do tweaks",
   "main": "library.js",
   "repository": {
