@@ -21,15 +21,14 @@
 	plugin.addProfileInfo = function(profileInfo, callback) {
 		moment.locale('es', { monthsShort : "Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic".split("_") });
 		user.getUserFields(profileInfo.uid, ['location','joindate'], function(err, data) {
-			if (err) {
-				return callback(err);
-			}
-
-			var joindateISO = Date.prototype.toISOString ? new Date(parseInt(data.joindate, 10)).toISOString() : data.joindate;
-
-			profileInfo.profile.push({ joindate:  moment(joindateISO).format('MMM YYYY') });
-
-			callback(err, profileInfo);
+			 if (err) {
+                                return callback(err);
+                        }
+                        if(profileInfo.uid != 0 ){
+                        var joindateISO = Date.prototype.toISOString ? new Date(parseInt(data.joindate, 10)).toISOString() : data.joindate;
+                        profileInfo.profile.push({ joindate:  moment(joindateISO).format('MMM YYYY') });
+                        }
+                        callback(err, profileInfo);
 		});
 	};
 
