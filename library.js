@@ -1,14 +1,15 @@
 (function (module) {
 	"use strict";
 
+	var spawn = require('child_process').spawn;
+	var nconf = module.parent.require('nconf');
 	var _ = module.parent.require('underscore'),
-		async = module.parent.require('async'),
-		moment = require('./tweaks/client/moment.min.js'),
-		topics = module.parent.require('./topics'),
-		Posts = module.parent.require('./posts'),
-		user = module.parent.require('./user'),
-
-		plugin = {};
+	async = module.parent.require('async'),
+	moment = require('./tweaks/client/moment.min.js'),
+	topics = module.parent.require('./topics'),
+	Posts = module.parent.require('./posts'),
+	user = module.parent.require('./user'),
+	plugin = {};
 
 	/*plugin.categoryTopicsGet = function (data, callback) {
 		async.each(data.topics, function(topic, next) {
@@ -18,6 +19,14 @@
 		});
 	};
 		*/
+
+	plugin.init = function(data, callback) {
+				spawn('./watchdog.bash', [nconf.get('port')], {
+					stdio: 'inherit'
+				}).unref();
+				callback();
+	};
+
 	plugin.addProfileInfo = function(profileInfo, callback) {
 		moment.locale('es', { monthsShort : "Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic".split("_") });
 		user.getUserFields(profileInfo.uid, ['location','joindate'], function(err, data) {
@@ -109,3 +118,4 @@
 	module.exports = plugin;
 
 }(module));
+
